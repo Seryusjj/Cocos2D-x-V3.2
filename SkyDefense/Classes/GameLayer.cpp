@@ -57,7 +57,7 @@ bool GameLayer::init()
 
 	//create array to store all falling objects (will use it in collision check)
 	fallingObjects = Vector<Node*>(40);
-	SimpleAudioEngine::getInstance()->playBackgroundMusic("background.mp3", true);
+	SimpleAudioEngine::getInstance()->playBackgroundMusic(FileNameOrganicer::getInstance()->backgroundMusic, true);
 	//lsiten for touches
 	auto touchListener = EventListenerTouchOneByOne::create();
 	touchListener->onTouchBegan = CC_CALLBACK_2(GameLayer::onTouchBegan, this);
@@ -102,7 +102,7 @@ void GameLayer::update(float dt) {
 			if (pow(diffx, 2) + pow(diffy, 2) <= pow(shockWave->getBoundingBox().size.width * 0.5f, 2)) {
 				sprite->stopAllActions();
 				sprite->runAction(explosion->clone());
-				SimpleAudioEngine::getInstance()->playEffect("boom.wav");
+				SimpleAudioEngine::getInstance()->playEffect(FileNameOrganicer::getInstance()->boomSound);
 				if (sprite->getTag() == SpriteMeteor) {
 					shockwaveHits++;
 					score += shockwaveHits * 13 + shockwaveHits * 2;
@@ -135,9 +135,12 @@ void GameLayer::update(float dt) {
 void GameLayer::resetHealth() {
 	if (fallingObjects.size() > 30) return;
 
-	Node * health = healthPool.at(meteorPoolIndex);
+	Node * health = healthPool.at(healthPoolIndex);
 	healthPoolIndex++;
-	if (healthPoolIndex == healthPool.size()) healthPoolIndex = 0;
+	if (healthPoolIndex == healthPool.size())
+	{
+		healthPoolIndex = 0;
+	}
 
 	int health_x = rand() % (int)(screenSize.width * 0.8f) + screenSize.width * 0.1f;
 	int health_target_x = rand() % (int)(screenSize.width * 0.8f) + screenSize.width * 0.1f;
@@ -151,9 +154,9 @@ void GameLayer::resetHealth() {
 		CallFuncN::create(CC_CALLBACK_1(GameLayer::fallingObjectDone, this)), NULL);
 
 	health->setVisible(true);
-	health->runAction((Action *)swingHealth->clone());
+	health->runAction(swingHealth->clone());
 	health->runAction(sequence);
-	fallingObjects.insert(fallingObjects.size(), health);
+	fallingObjects.pushBack(health);
 }
 
 
@@ -190,10 +193,10 @@ bool GameLayer::onTouchBegan(Touch *touch, Event *unused_event){
 				shockWave->setVisible(true);
 				shockWave->runAction(ScaleTo::create(0.5f, bomb->getScale() * 2.0f));
 				shockWave->runAction(shockwaveSequence->clone());
-				SimpleAudioEngine::getInstance()->playEffect("bombRelease.wav");
+				SimpleAudioEngine::getInstance()->playEffect(FileNameOrganicer::getInstance()->bombReleaseSound);
 			}
 			else {
-				SimpleAudioEngine::getInstance()->playEffect("bombFail.wav");
+				SimpleAudioEngine::getInstance()->playEffect(FileNameOrganicer::getInstance()->bombFailSound);
 			}
 			bomb->setVisible(false);
 			//reset hits with shockwave, so we can count combo hits
@@ -234,7 +237,7 @@ void GameLayer::fallingObjectDone(Node* pSender) {
 		//show explosion animation
 		pSender->runAction(groundHit->clone());
 		//play explosion sound
-		SimpleAudioEngine::getInstance()->playEffect("boom.wav");
+		SimpleAudioEngine::getInstance()->playEffect(FileNameOrganicer::getInstance()->boomSound);
 
 		//if object is a health drop...
 	}
@@ -245,25 +248,26 @@ void GameLayer::fallingObjectDone(Node* pSender) {
 		if (energy == 100) {
 
 			score += 25;
-			char score[100] = { 0 };
-			sprintf(score, "%i", score);
-			scoreDisplay->setString(score);
+			
+		
+			scoreDisplay->setString(std::to_string(score));
 
 		}
 		else {
 			energy += 10;
-			if (energy > 100) energy = 100;
+			if (energy > 100) { energy = 100; }
+			energyDisplay->setString(std::to_string(energy));
 		}
 
 		//play health bonus sound
-		SimpleAudioEngine::getInstance()->playEffect("health.wav");
+		SimpleAudioEngine::getInstance()->playEffect(FileNameOrganicer::getInstance()->healthSound);
 	}
 
 	//if energy is less or equal 0, game over
 	if (energy <= 0) {
 		energy = 0;
 		this->stopGame();
-		SimpleAudioEngine::getInstance()->playEffect("fire_truck.wav");
+		SimpleAudioEngine::getInstance()->playEffect(FileNameOrganicer::getInstance()->fireSound);
 		//show GameOver
 		gameOverMessage->setVisible(true);
 	}
@@ -290,12 +294,12 @@ void GameLayer::resetMeteor() {
 	Node * meteor = meteorPool.at(meteorPoolIndex);
 	meteorPoolIndex++;
 	if (meteorPoolIndex == meteorPool.size())
-		meteorPoolIndex = 0;
+	{		
+		meteorPoolIndex = 0; 
+	}
 	//pick start and target positions for new meteor
-	int meteor_x = rand() % (int)(screenSize.width * 0.8f) +
-		screenSize.width * 0.1f;
-	int meteor_target_x = rand() % (int)
-		(screenSize.width * 0.8f) + screenSize.width * 0.1f;
+	int meteor_x = rand() % (int)(screenSize.width * 0.8f) +screenSize.width * 0.1f;
+	int meteor_target_x = rand() % (int)(screenSize.width * 0.8f) + screenSize.width * 0.1f;
 	meteor->stopAllActions();
 	meteor->setPosition(Point(meteor_x, screenSize.height + meteor->getBoundingBox().size.height * 0.5));
 	//create action for meteor
@@ -375,11 +379,10 @@ void GameLayer::createGameScreen() {
 	bg->setPosition(Point(screenSize.width * 0.5f, screenSize.height * 0.5f));
 	this->addChild(bg);
 
-	SpriteFrameCache::getInstance()->
-		addSpriteFramesWithFile("sprite_sheet.plist");
+	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("sprite_sheet.plist");
 	gameBatchNode = SpriteBatchNode::create("sprite_sheet.png");
+	
 	this->addChild(gameBatchNode);
-
 	Sprite* sprite;
 	for (int i = 0; i < 2; i++){
 		sprite = Sprite::createWithSpriteFrameName("city_dark.png");
@@ -433,10 +436,12 @@ void GameLayer::createGameScreen() {
 	shockWave->getTexture()->generateMipmap();
 	shockWave->setVisible(false);
 	gameBatchNode->addChild(shockWave);
+	
+	createUI();
+	
+}
 
-
-	//UI
-
+void GameLayer::createUI(){
 	//create bitmap font and set a text
 	//loand the file descriptor that tels where the .png is and how to use it
 
@@ -481,10 +486,11 @@ void GameLayer::createPools() {
 		meteorPoolIndex++;
 	}
 	meteorPoolIndex = 0;
+
 	healthPool = Vector<Node*>(20);
 	healthPoolIndex = 0;
 	while (healthPoolIndex < 20) {
-		sprite = Sprite::createWithSpriteFrameName("meteor.png");
+		sprite = Sprite::createWithSpriteFrameName("health.png");
 		sprite->setVisible(false);
 		sprite->setAnchorPoint(Point(0.5f, 0.8f));
 		gameBatchNode->addChild(sprite, Middleground, SpriteHealth);

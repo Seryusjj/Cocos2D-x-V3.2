@@ -1,7 +1,4 @@
 #include "AppDelegate.h"
-#include "GameLayer.h"
-#include "SimpleAudioEngine.h"
-
 
 
 
@@ -42,12 +39,12 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	fileUtils->setSearchPaths(resDirOrders);
 
 	//preload sound effects and background music
-	SimpleAudioEngine::getInstance()->preloadBackgroundMusic(FileUtils::getInstance()->fullPathForFilename("background.mp3").c_str());
-	SimpleAudioEngine::getInstance()->preloadEffect(FileUtils::getInstance()->fullPathForFilename("bombFail.wav").c_str());
-	SimpleAudioEngine::getInstance()->preloadEffect(FileUtils::getInstance()->fullPathForFilename("bombRelease.wav").c_str());
-	SimpleAudioEngine::getInstance()->preloadEffect(FileUtils::getInstance()->fullPathForFilename("boom.wav").c_str());
-	SimpleAudioEngine::getInstance()->preloadEffect(FileUtils::getInstance()->fullPathForFilename("health.wav").c_str());
-	SimpleAudioEngine::getInstance()->preloadEffect(FileUtils::getInstance()->fullPathForFilename("fire_truck.wav").c_str());
+	SimpleAudioEngine::getInstance()->preloadBackgroundMusic(FileNameOrganicer::getInstance()->backgroundMusic);
+	SimpleAudioEngine::getInstance()->preloadEffect(FileNameOrganicer::getInstance()->bombFailSound);
+	SimpleAudioEngine::getInstance()->preloadEffect(FileNameOrganicer::getInstance()->bombReleaseSound);
+	SimpleAudioEngine::getInstance()->preloadEffect(FileNameOrganicer::getInstance()->boomSound);
+	SimpleAudioEngine::getInstance()->preloadEffect(FileNameOrganicer::getInstance()->healthSound);
+	SimpleAudioEngine::getInstance()->preloadEffect(FileNameOrganicer::getInstance()->fireSound);
 
 	//lower playback volume for effects
 	SimpleAudioEngine::getInstance()->setEffectsVolume(0.4f);
