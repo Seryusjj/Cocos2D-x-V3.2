@@ -29,9 +29,28 @@ public:
 	const char* healthSound = "health.wav";
 	const char* fireSound = "fire_truck.wav";
 
-	//texture names
+	//texture source names
 	const std::string spriteSheetPlist = "sprite_sheet.plist";
 	const std::string spriteSheetPng = "sprite_sheet.png";
+
+	//texture names
+	const std::string backgroundTexure = "bg.png";
+	const std::string cityDarkTexure = "city_dark.png";
+	const std::string cityLightTexture = "city_light.png";
+	const std::string treesTexture = "trees.png";
+	const std::string cloudTexture = "cloud.png";
+	const std::string bombTexture = "bomb.png";
+	const std::string sparckleTexture = "sparkle.png";
+	const std::string haloTexture = "halo.png";
+	const std::string shockwaveTexture = "shockwave.png";
+	const std::string meteorTexture = "meteor.png";
+	const std::string healthTexture = "health.png";
+
+	//ui texture name
+	const std::string fontUISource = "font.fnt";
+	const std::string introMessageUITexture = "logo.png";
+	const std::string gameOverUITexture = "gameover.png";
+	const std::string healtUITexture = "health_icon.png";
 
 	static FileNameOrganicer* getInstance();
 

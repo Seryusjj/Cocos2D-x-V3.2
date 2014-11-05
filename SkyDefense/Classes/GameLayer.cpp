@@ -375,29 +375,29 @@ void GameLayer::stopGame() {
 void GameLayer::createGameScreen() {
 	//SCENE
 	//add bg
-	Sprite * bg = AssetsManager::getInstance()->getBackground();
+	Sprite * bg = Sprite::create(FileNameOrganicer::getInstance()->backgroundTexure);
 	bg->setPosition(Point(screenSize.width * 0.5f, screenSize.height * 0.5f));
 	this->addChild(bg);
 
-	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("sprite_sheet.plist");
-	gameBatchNode = SpriteBatchNode::create("sprite_sheet.png");
+	SpriteFrameCache::getInstance()->addSpriteFramesWithFile(FileNameOrganicer::getInstance()->spriteSheetPlist);
+	gameBatchNode = SpriteBatchNode::create(FileNameOrganicer::getInstance()->spriteSheetPng);
 	
 	this->addChild(gameBatchNode);
 	Sprite* sprite;
 	for (int i = 0; i < 2; i++){
-		sprite = Sprite::createWithSpriteFrameName("city_dark.png");
+		sprite = Sprite::createWithSpriteFrameName(FileNameOrganicer::getInstance()->cityDarkTexure);
 		sprite->setPosition(Point(screenSize.width*(0.25f + i*0.5f),
 			sprite->getBoundingBox().size.height*0.5f));
 		gameBatchNode->addChild(sprite, Foreground);
 
-		sprite = Sprite::createWithSpriteFrameName("city_light.png");
+		sprite = Sprite::createWithSpriteFrameName(FileNameOrganicer::getInstance()->cityLightTexture);
 		sprite->setPosition(Point(screenSize.width*(0.25f + i*0.5f), sprite->getBoundingBox().size.height*0.9f));
 		gameBatchNode->addChild(sprite, Background);
 	}
 
 	//add trees
 	for (int i = 0; i < 3; i++){
-		sprite = Sprite::createWithSpriteFrameName("trees.png");
+		sprite = Sprite::createWithSpriteFrameName(FileNameOrganicer::getInstance()->treesTexture);
 		sprite->setPosition(Point(screenSize.width*(0.2f + i*0.3f),
 			sprite->getBoundingBox().size.height*0.5f));
 		gameBatchNode->addChild(sprite, Foreground);
@@ -409,30 +409,30 @@ void GameLayer::createGameScreen() {
 	float cloud_y;
 	for (int i = 0; i < 4; i++) {
 		cloud_y = i % 2 == 0 ? screenSize.height * 0.4f : screenSize.height * 0.5f;
-		sprite = Sprite::createWithSpriteFrameName("cloud.png");
+		sprite = Sprite::createWithSpriteFrameName(FileNameOrganicer::getInstance()->cloudTexture);
 		sprite->setPosition(Point(screenSize.width * 0.1f + i *
 			screenSize.width * 0.3f, cloud_y));
 		gameBatchNode->addChild(sprite, Background);
 		clouds.insert(i, sprite);
 	}
 	//add bomb
-	bomb = Sprite::createWithSpriteFrameName("bomb.png");
+	bomb = Sprite::createWithSpriteFrameName(FileNameOrganicer::getInstance()->bombTexture);
 	//generateMipmap is antialiasing (allow resize without lose quality)
 	bomb->getTexture()->generateMipmap();
 	bomb->setVisible(false);
 	Size size = bomb->getBoundingBox().size;
 	//add sparkle inside bomb sprite
-	Sprite * sparkle = Sprite::createWithSpriteFrameName("sparkle.png");
+	Sprite * sparkle = Sprite::createWithSpriteFrameName(FileNameOrganicer::getInstance()->sparckleTexture);
 	sparkle->setPosition(Point(size.width * 0.72f, size.height *0.72f));
 	bomb->addChild(sparkle, Middleground, SpriteSparkle);
 
 	//add halo inside bomb sprite
-	Sprite * halo = Sprite::createWithSpriteFrameName("halo.png");
+	Sprite * halo = Sprite::createWithSpriteFrameName(FileNameOrganicer::getInstance()->haloTexture);
 	halo->setPosition(Point(size.width * 0.4f, size.height *	0.4f));
 	bomb->addChild(halo, Middleground, SpriteHalo);
 	gameBatchNode->addChild(bomb, Foreground);
 
-	shockWave = CCSprite::createWithSpriteFrameName("shockwave.png");
+	shockWave = CCSprite::createWithSpriteFrameName(FileNameOrganicer::getInstance()->shockwaveTexture);
 	shockWave->getTexture()->generateMipmap();
 	shockWave->setVisible(false);
 	gameBatchNode->addChild(shockWave);
@@ -445,7 +445,7 @@ void GameLayer::createUI(){
 	//create bitmap font and set a text
 	//loand the file descriptor that tels where the .png is and how to use it
 
-	scoreDisplay = Label::createWithBMFont("font.fnt", "0");
+	scoreDisplay = Label::createWithBMFont(FileNameOrganicer::getInstance()->fontUISource, "0");
 	scoreDisplay->setAnchorPoint(Point(1, 0.5));
 	//anchor point pone el punto desde el que se mueve la imagen en 
 	//  000
@@ -454,21 +454,21 @@ void GameLayer::createUI(){
 	scoreDisplay->setPosition(Point(screenSize.width * 0.8f, screenSize.height * 0.94f));
 	this->addChild(scoreDisplay);
 
-	energyDisplay = Label::createWithBMFont("font.fnt", "100%", TextHAlignment::RIGHT);//, screenSize.width * 0.1f, TextHAlignment::RIGHT);
+	energyDisplay = Label::createWithBMFont(FileNameOrganicer::getInstance()->fontUISource, "100%", TextHAlignment::RIGHT);//, screenSize.width * 0.1f, TextHAlignment::RIGHT);
 	energyDisplay->setPosition(Point(screenSize.width * 0.3f, screenSize.height * 0.94f));
 	this->addChild(energyDisplay);
 
 	//icon 
-	Sprite * icon = Sprite::createWithSpriteFrameName("health_icon.png");
+	Sprite * icon = Sprite::createWithSpriteFrameName(FileNameOrganicer::getInstance()->healtUITexture);
 	icon->setPosition(Point(screenSize.width * 0.15f, screenSize.height * 0.94f));
 	gameBatchNode->addChild(icon, Background);
 
 
-	introMessage = Sprite::createWithSpriteFrameName("logo.png");
+	introMessage = Sprite::createWithSpriteFrameName(FileNameOrganicer::getInstance()->introMessageUITexture);
 	introMessage->setPosition(Point(screenSize.width * 0.5f, screenSize.height * 0.6f));
 	introMessage->setVisible(true);
 	this->addChild(introMessage, Foreground);
-	gameOverMessage = Sprite::createWithSpriteFrameName("gameover.png");
+	gameOverMessage = Sprite::createWithSpriteFrameName(FileNameOrganicer::getInstance()->gameOverUITexture);
 	gameOverMessage->setPosition(Point(screenSize.width * 0.5f, screenSize.height * 0.65f));
 	gameOverMessage->setVisible(false);
 	this->addChild(gameOverMessage, Foreground);
@@ -479,7 +479,7 @@ void GameLayer::createPools() {
 	Sprite* sprite;
 	meteorPoolIndex = 0;
 	while (meteorPoolIndex < 50) {
-		sprite = Sprite::createWithSpriteFrameName("meteor.png");
+		sprite = Sprite::createWithSpriteFrameName(FileNameOrganicer::getInstance()->meteorTexture);
 		sprite->setVisible(false);
 		gameBatchNode->addChild(sprite, Middleground, SpriteMeteor);
 		meteorPool.insert(meteorPoolIndex, sprite);
@@ -490,7 +490,7 @@ void GameLayer::createPools() {
 	healthPool = Vector<Node*>(20);
 	healthPoolIndex = 0;
 	while (healthPoolIndex < 20) {
-		sprite = Sprite::createWithSpriteFrameName("health.png");
+		sprite = Sprite::createWithSpriteFrameName(FileNameOrganicer::getInstance()->healthTexture);
 		sprite->setVisible(false);
 		sprite->setAnchorPoint(Point(0.5f, 0.8f));
 		gameBatchNode->addChild(sprite, Middleground, SpriteHealth);

@@ -3,7 +3,6 @@
 
 #include<iostream>
 #include "cocos2d.h"
-#include "AssetsManager.h"
 #include "FileNameOrganicer.h"
 
 USING_NS_CC;
