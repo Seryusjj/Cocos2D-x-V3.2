@@ -2,6 +2,11 @@
 #define  _APP_DELEGATE_H_
 
 #include "cocos2d.h"
+#include "GameLayer.h"
+#include "SimpleAudioEngine.h"
+
+using namespace cocos2d;
+using namespace CocosDenshion;
 
 /**
 @brief    The cocos2d Application.
