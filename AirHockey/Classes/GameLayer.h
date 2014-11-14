@@ -4,6 +4,11 @@
 #define GOAL_WIDTH 400 //width in pixels for the goals
 #include "cocos2d.h"
 #include "GameSprite.h"
+#include "SimpleAudioEngine.h"
+#include "AdmobHelper.h"
+
+USING_NS_CC;
+using namespace CocosDenshion;
 
 USING_NS_CC;
 

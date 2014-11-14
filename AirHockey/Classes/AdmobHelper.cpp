@@ -1,5 +1,5 @@
 #include "AdmobHelper.h"
-#include "cocos2d.h"
+
 
 
 bool AdmobHelper::isAdShowing = true;
@@ -47,7 +47,7 @@ void AdmobHelper::showAd()
 
 void AdmobHelper::hideAd()
 {
-	CCLOG("hideAd() called");
+	//CCLOG("hideAd() called");
 	isAdShowing = false;
 	return; //nothing
 }
@@ -55,7 +55,7 @@ void AdmobHelper::hideAd()
 
 void AdmobHelper::showAd()
 {
-	CCLOG("showAd() called");
+	//CCLOG("showAd() called");
 	isAdShowing = true;
 	return; //nothing;
 

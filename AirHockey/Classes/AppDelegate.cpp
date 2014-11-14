@@ -1,8 +1,5 @@
 #include "AppDelegate.h"
-#include "GameLayer.h"
-#include "SimpleAudioEngine.h"
-#include <iostream>
-#include <memory>
+
 
 USING_NS_CC;//uing namespace cocos2d
 using namespace CocosDenshion;

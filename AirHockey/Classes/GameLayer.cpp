@@ -1,9 +1,4 @@
 #include "GameLayer.h"
-#include "SimpleAudioEngine.h"
-#include "AdmobHelper.h"
-
-USING_NS_CC;
-using namespace CocosDenshion;
 
 Scene* GameLayer::createScene()
 {
@@ -269,7 +264,7 @@ void GameLayer::onTouchesBegan(const std::vector<Touch *> &touches, Event *unuse
 
         Touch* touch = nullptr;
         Point tap;
-        for(uint i=0;i<touches.size();i++){
+        for(int i=0;i<touches.size();i++){
             touch=touches.at(i);
             if(touch != nullptr){
                 tap=touch->getLocation();
@@ -286,7 +281,7 @@ void GameLayer::onTouchesBegan(const std::vector<Touch *> &touches, Event *unuse
 void GameLayer::onTouchesMoved(const std::vector<Touch*>& touches, Event *unused_event){
     Touch* touch = nullptr;
     Point tap;
-    for(uint i=0;i<touches.size();i++){
+    for(int i=0;i<touches.size();i++){
         touch=touches.at(i);
         if(touch!=nullptr){
             tap=touch->getLocation();
@@ -309,7 +304,7 @@ void GameLayer::onTouchesMoved(const std::vector<Touch*>& touches, Event *unused
 void GameLayer::onTouchesEnded(const std::vector<Touch*>& touches, Event *unused_event){
     Touch* touch=nullptr;
     Point tap;
-    for(uint i=0;i<touches.size();i++){
+    for(int i=0;i<touches.size();i++){
         touch=touches.at(i);
         if(touch!=nullptr){
             tap=touch->getLocation();

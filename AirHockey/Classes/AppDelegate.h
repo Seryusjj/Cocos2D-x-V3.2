@@ -2,6 +2,10 @@
 #define  _APP_DELEGATE_H_
 
 #include "cocos2d.h"
+#include "GameLayer.h"
+#include "SimpleAudioEngine.h"
+#include <iostream>
+#include <memory>
 
 /**
 @brief    The cocos2d Application.

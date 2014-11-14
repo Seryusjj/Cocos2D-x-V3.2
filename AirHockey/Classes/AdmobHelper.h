@@ -1,6 +1,6 @@
 #ifndef  __ADMOB_HELPER_H_
 #define  __ADMOB_HELPER_H_
-
+#include "cocos2d.h"
 class AdmobHelper
 {
 public:
