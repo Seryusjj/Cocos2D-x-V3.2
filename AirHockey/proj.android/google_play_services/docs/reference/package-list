@@ -13,6 +13,7 @@ com.google.android.gms.analytics.ecommerce
 com.google.android.gms.appindexing
 com.google.android.gms.appstate
 com.google.android.gms.auth
+com.google.android.gms.auth.api
 com.google.android.gms.cast
 com.google.android.gms.common
 com.google.android.gms.common.annotation
@@ -24,6 +25,11 @@ com.google.android.gms.drive.events
 com.google.android.gms.drive.metadata
 com.google.android.gms.drive.query
 com.google.android.gms.drive.widget
+com.google.android.gms.fitness
+com.google.android.gms.fitness.data
+com.google.android.gms.fitness.request
+com.google.android.gms.fitness.result
+com.google.android.gms.fitness.service
 com.google.android.gms.games
 com.google.android.gms.games.achievement
 com.google.android.gms.games.event
