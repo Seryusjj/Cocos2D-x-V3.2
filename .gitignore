@@ -16,7 +16,19 @@ out/
 !*/proj.android/google_play_services/libproject/google-play-services_lib/bin/
 !*/proj.android/google_play_services/libproject/google-play-services_lib/libs/
 !*/proj.android/google_play_services/libproject/google-play-services_lib/gen/
-
+#generated files at compile time
+*/google-play-services_lib/bin/AndroidManifest.xml.d
+*/google-play-services_lib/bin/build.prop
+*/google-play-services_lib/bin/classes.jar
+*/google-play-services_lib/bin/proguard.txt
+*/google-play-services_lib/bin/res/drawable-hdpi/
+*/google-play-services_lib/bin/res/drawable-mdpi/
+*/google-play-services_lib/bin/res/drawable-tvdpi/
+*/google-play-services_lib/bin/res/drawable-xhdpi/
+*/google-play-services_lib/bin/res/drawable-xxhdpi/
+*/google-play-services_lib/build.xml
+*/google-play-services_lib/gen/R.java.d
+*/google-play-services_lib/proguard-project.txt
 
 # backup files
 *.bak
