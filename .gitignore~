@@ -13,10 +13,7 @@ out/
 .cproject
 
 #do not ignore google play services
-!*/proj.android/google_play_services/libproject/google-play-services_lib/bin/
-!*/proj.android/google_play_services/libproject/google-play-services_lib/libs/
-!*/proj.android/google_play_services/libproject/google-play-services_lib/gen/
-
+!*/google_play_services/
 
 # backup files
 *.bak
