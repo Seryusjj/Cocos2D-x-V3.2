@@ -103,10 +103,13 @@ public class AppActivity extends Cocos2dxActivity {
 		adView.setAdSize(AdSize.BANNER);
 		adView.setAdUnitId(AD_UNIT_ID);
 
+		
 		AdRequest adRequest = new AdRequest.Builder()
-							.addTestDevice(AD_UNIT_ID).build();
+							.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+							.addTestDevice("SH19HTR11632").build();
 
 		adView.loadAd(adRequest);
+
 		adView.setBackgroundColor(Color.BLACK);
 		adView.setBackgroundColor(0);
 
