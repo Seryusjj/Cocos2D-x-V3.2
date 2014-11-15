@@ -1,100 +1,104 @@
-#ifndef __GAME_LAYER_H__
-#define __GAME_LAYER_H__
+#ifndef __GAMELAYER_H__
+#define __GAMELAYER_H__
+
 
 #include "cocos2d.h"
 #include "SimpleAudioEngine.h"
+#include "rocketthrough/Rocket.h"
+#include "rocketthrough/LineContainer.h"
 
 
-using namespace cocos2d;
+USING_NS_CC;
 using namespace CocosDenshion;
 
 enum {
-	background,
-	middleground,
-	foreground
+    background,
+    middleground,
+    foreground
 };
 
 enum {
-	spriteRocket,
-	sritePlanet,
-	spriteBoost,
-	spriteStar
+    spriteRocket,
+    spritePlanet,
+    spriteBoost,
+    spriteStar
 };
 
 typedef enum gamestates {
-	gameIntro,
-	gamePaused,
-	gamePlay,
-	gameOver
-
+    gameIntro,
+    gamePaused,
+    gamePlay,
+    gameOver
+    
 }GameState;
 
-class Rocket;
-class LineContainer;
-class GameSprite;
- 
-class GameLayer : public cocos2d::Layer
-{
-private:
-	Rocket * _rocket;
-	LineContainer * _lineContainer;
 
-	SpriteBatchNode *_gameBatchNode;
-	Label * _scoreDisplay;
 
-	GameSprite * _pauseBtn;
-	Sprite * _intro;
-	Sprite *_gameOver;
-	Sprite *_paused;
 
-	ParticleSystem * _star;
-	ParticleSystem * _jet;
-	ParticleSystem * _boom;
-	ParticleSystem * _comet;
-	ParticleSystem * _pickup;
-	ParticleSystem * _warp;
+class GameLayer : public Layer {
+    
+	
+    Rocket * _rocket;
+    LineContainer * _lineContainer;
+    
+    SpriteBatchNode *_gameBatchNode;
+    Label * _scoreDisplay;
+    
+    GameSprite * _pauseBtn;
+    Sprite * _intro;
+    Sprite *_gameOver;
+    Sprite *_paused;
+    
+    ParticleSystem * _star;
+    ParticleSystem * _jet;
+    ParticleSystem * _boom;
+    ParticleSystem * _comet;
+    ParticleSystem * _pickup;
+    ParticleSystem * _warp;
+    
+    Vector<Node*>  _planets;
+    Size _screenSize;
+    
+    GameState _state;
+    
+    bool _drawing;
+    bool _running;
 
-	Vector<Node*> _planets;
-	Size _screenSize;
-
-	GameState _state;
-
-	bool _drawing;
-	bool _running;
-
-	std::vector<Point> _grid;
-	int _gridIndex;
-
-	int _minLineLength;
-	float _cometInterval;
-	float _cometTimer;
-
-	void resetGame();
-	void resetStar();
-	void killPlayer();
-
-	void createGameScreen();
-	void createParticles();
-	void createStarGrid();
+    std::vector<Point> _grid;
+    int _gridIndex;
+    
+    int _minLineLength;
+    float _cometInterval;
+    float _cometTimer;
+    
+    void resetGame();
+    void resetStar();
+    void killPlayer();
+    
+    void createGameScreen();
+    void createParticles();
+    void createStarGrid();
 
 	int _score;
 	float _timeBetweenPickups;
-
+    
 public:
 	~GameLayer();
-    // there's no 'id' in cpp, so we recommend returning the class instance pointer
-    static cocos2d::Scene* createScene();
-
-    // Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
-    virtual bool init();  
+	// there's no 'id' in cpp, so we recommend returning the class instance pointer
+	static cocos2d::Scene* createScene();
+	// Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
+	virtual bool init();
     
-
-	void update(float dt);
+    void update (float dt);
+	
 	virtual bool onTouchBegan(Touch *touch, Event *unused_event);
 	virtual void onTouchMoved(Touch *touch, Event *unused_event);
 	virtual void onTouchEnded(Touch *touch, Event *unused_event);
-    // implement the "static create()" method manually
+    
+    // preprocessor macro for "static create()" constructor ( node() deprecated )
     CREATE_FUNC(GameLayer);
+	
+
 };
 
-#endif // __GAME_LAYER_H__
+#endif // __GAMELAYER_H__

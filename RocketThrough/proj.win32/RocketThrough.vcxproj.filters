@@ -24,9 +24,6 @@
     <ClCompile Include="..\Classes\GameLayer.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\HelloWorldScene.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\rocketthrough\GameSprite.cpp">
       <Filter>Classes\rocketthrough</Filter>
     </ClCompile>
@@ -45,9 +42,6 @@
       <Filter>Classes</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\GameLayer.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\HelloWorldScene.h">
       <Filter>Classes</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\rocketthrough\GameSprite.h">
