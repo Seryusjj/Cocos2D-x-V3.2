@@ -30,6 +30,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import org.cocos2dx.lib.Cocos2dxActivity;
+import org.cocos2dx.lib.Cocos2dxGLSurfaceView;
 
 import android.annotation.TargetApi;
 import android.graphics.Color;
@@ -40,53 +41,19 @@ import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 
 public class AppActivity extends Cocos2dxActivity {
 
 	private static AppActivity _appActiviy;
-	private AdView adView;
-	private static final String AD_UNIT_ID = "ca-app-pub-5951906881680430/5553105908";
-
-	// Helper get display screen to avoid deprecated function use
-	private Point getDisplaySize(Display d) {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			return getDisplaySizeGE11(d);
-		}
-		return getDisplaySizeLT11(d);
-	}
-
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
-	private Point getDisplaySizeGE11(Display d) {
-		Point p = new Point(0, 0);
-		d.getSize(p);
-		return p;
-	}
-
-	private Point getDisplaySizeLT11(Display d) {
-		try {
-			Method getWidth = Display.class.getMethod("getWidth",
-					new Class[] {});
-			Method getHeight = Display.class.getMethod("getHeight",
-					new Class[] {});
-			return new Point(
-					((Integer) getWidth.invoke(d, (Object[]) null)).intValue(),
-					((Integer) getHeight.invoke(d, (Object[]) null)).intValue());
-		} catch (NoSuchMethodException e2) // None of these exceptions should
-											// ever occur.
-		{
-			return new Point(-1, -1);
-		} catch (IllegalArgumentException e2) {
-			return new Point(-2, -2);
-		} catch (IllegalAccessException e2) {
-			return new Point(-3, -3);
-		} catch (InvocationTargetException e2) {
-			return new Point(-4, -4);
-		}
-	}
+	private InterstitialAd intersticial;
+	private static final String AD_UNIT_ID = "ca-app-pub-5951906881680430/1122906308";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -94,76 +61,60 @@ public class AppActivity extends Cocos2dxActivity {
 
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-		int width = getDisplaySize(getWindowManager().getDefaultDisplay()).x;
+		LinearLayout.LayoutParams adLayOut = new LinearLayout.LayoutParams(
+				LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
-		LinearLayout.LayoutParams adParams = new LinearLayout.LayoutParams(
-				width, LinearLayout.LayoutParams.WRAP_CONTENT);
+		intersticial = new InterstitialAd(this);
 
-		adView = new AdView(this);
-		adView.setAdSize(AdSize.BANNER);
-		adView.setAdUnitId(AD_UNIT_ID);
+		intersticial.setAdUnitId(AD_UNIT_ID);
 
 		AdRequest adRequest = new AdRequest.Builder().addTestDevice(
 				"SH19HTR11632").build();
 
-		adView.loadAd(adRequest);
+		intersticial.loadAd(adRequest);
 
-		adView.setBackgroundColor(Color.BLACK);
-		adView.setBackgroundColor(0);
-
-		addContentView(adView, adParams);
+		final Toast m= Toast.makeText(this, "The interstitial is loaded", Toast.LENGTH_SHORT);
+		intersticial.setAdListener(new AdListener() {
+		
+			public void onAdLoaded() {
+				m.show();
+			}
+		});
 
 		_appActiviy = this;
 
 	}
 
 	public static void hideAd() {
-		_appActiviy.runOnUiThread(new Runnable() {
-
-			@Override
-			public void run() {
-				if (_appActiviy.adView.isEnabled())
-					_appActiviy.adView.setEnabled(false);
-				if (_appActiviy.adView.getVisibility() != 4)
-					_appActiviy.adView.setVisibility(View.INVISIBLE);
-			}
-		});
+		
 
 	}
 
 	public static void showAd() {
-		_appActiviy.runOnUiThread(new Runnable() {
 
-			@Override
-			public void run() {
-				if (!_appActiviy.adView.isEnabled())
-					_appActiviy.adView.setEnabled(true);
-				if (_appActiviy.adView.getVisibility() == 4)
-					_appActiviy.adView.setVisibility(View.VISIBLE);
-			}
-		});
+		if (_appActiviy.intersticial.isLoaded()) {
+			
+			
+			_appActiviy.intersticial.show();
+		}
 
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
-		if (adView != null) {
-			adView.resume();
-		}
+
 	}
 
 	@Override
 	protected void onPause() {
-		if (adView != null) {
-			adView.pause();
-		}
+
 		super.onPause();
 	}
 
 	@Override
 	protected void onDestroy() {
-		adView.destroy();
+
 		super.onDestroy();
 	}
 
