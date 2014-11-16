@@ -78,5 +78,5 @@ bool HelloWorld::init()
 
 void HelloWorld::menuCloseCallback(Ref* pSender)
 {
-AdmobHelper::showAd();
+    AdmobHelper::showAd();
 }

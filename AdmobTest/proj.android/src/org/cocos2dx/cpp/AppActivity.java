@@ -26,33 +26,22 @@ THE SOFTWARE.
  ****************************************************************************/
 package org.cocos2dx.cpp;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-
 import org.cocos2dx.lib.Cocos2dxActivity;
-import org.cocos2dx.lib.Cocos2dxGLSurfaceView;
 
-import android.annotation.TargetApi;
-import android.graphics.Color;
-import android.graphics.Point;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.Display;
-import android.view.View;
 import android.view.WindowManager;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 
 public class AppActivity extends Cocos2dxActivity {
 
+	private static int numClick = 0;
+	private static boolean haveToLoad = true;
 	private static AppActivity _appActiviy;
-	private InterstitialAd intersticial;
+	private InterstitialAd interstitial;
+	private AdRequest adRequest;
 	private static final String AD_UNIT_ID = "ca-app-pub-5951906881680430/1122906308";
 
 	@Override
@@ -61,23 +50,25 @@ public class AppActivity extends Cocos2dxActivity {
 
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-		LinearLayout.LayoutParams adLayOut = new LinearLayout.LayoutParams(
-				LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+		interstitial = new InterstitialAd(this);
 
-		intersticial = new InterstitialAd(this);
+		interstitial.setAdUnitId(AD_UNIT_ID);
 
-		intersticial.setAdUnitId(AD_UNIT_ID);
+		adRequest = new AdRequest.Builder().addTestDevice("SH19HTR11632")
+				.addTestDevice("20080411").build();
 
-		AdRequest adRequest = new AdRequest.Builder().addTestDevice(
-				"SH19HTR11632").build();
+		interstitial.loadAd(adRequest);
+		interstitial.setAdListener(new AdListener() {
+			public void onAdClosed() {
+				// se consume el anuncio entonces recagar
+				if (numClick < 2) {
+					interstitial.loadAd(adRequest);
+				}
+			}
 
-		intersticial.loadAd(adRequest);
-
-		final Toast m= Toast.makeText(this, "The interstitial is loaded", Toast.LENGTH_SHORT);
-		intersticial.setAdListener(new AdListener() {
-		
-			public void onAdLoaded() {
-				m.show();
+			public void onAdLeftApplication() {
+				// por ejemplo 2 click por dia para no ser baneado
+				numClick++;
 			}
 		});
 
@@ -85,18 +76,29 @@ public class AppActivity extends Cocos2dxActivity {
 
 	}
 
-	public static void hideAd() {
-		
-
+	public static void preloadInterstitialAd() {
+		// _appActiviy.runOnUiThread(new Runnable() {
+		// public void run() {
+		// if (haveToLoad) {
+		//
+		//
+		// _appActiviy.interstitial.loadAd(_appActiviy.adRequest);
+		// haveToLoad = false;
+		// }
+		// }
+		// });
 	}
 
 	public static void showAd() {
 
-		if (_appActiviy.intersticial.isLoaded()) {
-			
-			
-			_appActiviy.intersticial.show();
-		}
+		_appActiviy.runOnUiThread(new Runnable() {
+			public void run() {
+				if (_appActiviy.interstitial.isLoaded()) {
+					_appActiviy.interstitial.show();
+
+				}
+			}
+		});
 
 	}
 
@@ -114,7 +116,6 @@ public class AppActivity extends Cocos2dxActivity {
 
 	@Override
 	protected void onDestroy() {
-
 		super.onDestroy();
 	}
 

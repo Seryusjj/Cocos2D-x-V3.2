@@ -1,0 +1,77 @@
+#Java
+*.class
+
+#cocos2d-x
+libs/
+bin/
+obj/
+assets/
+gen/
+out/
+.classpath
+.project
+.cproject
+
+#do not ignore google play services
+!*/proj.android/google_play_services/libproject/google-play-services_lib/bin/
+!*/proj.android/google_play_services/libproject/google-play-services_lib/libs/
+!*/proj.android/google_play_services/libproject/google-play-services_lib/gen/
+#ignore build files from google play 
+*/google-play-services_lib/bin/AndroidManifest.xml.d
+*/google-play-services_lib/bin/build.prop
+*/google-play-services_lib/bin/classes.jar
+*/google-play-services_lib/bin/proguard.txt
+proj.android/google_play_services/libproject/google-play-services_lib/bin/AndroidManifest.xml.d
+	proj.android/google_play_services/libproject/google-play-services_lib/bin/build.prop
+	proj.android/google_play_services/libproject/google-play-services_lib/bin/classes.jar
+	proj.android/google_play_services/libproject/google-play-services_lib/bin/proguard.txt
+	proj.android/google_play_services/libproject/google-play-services_lib/bin/res/drawable-hdpi/
+	proj.android/google_play_services/libproject/google-play-services_lib/bin/res/drawable-mdpi/
+	proj.android/google_play_services/libproject/google-play-services_lib/bin/res/drawable-tvdpi/
+	proj.android/google_play_services/libproject/google-play-services_lib/bin/res/drawable-xhdpi/
+	proj.android/google_play_services/libproject/google-play-services_lib/bin/res/drawable-xxhdpi/
+	proj.android/google_play_services/libproject/google-play-services_lib/build.xml
+	proj.android/google_play_services/libproject/google-play-services_lib/gen/R.java.d
+	proj.android/google_play_services/libproject/google-play-services_lib/proguard-project.txt
+
+lib/bin/res/drawable-hdpi/
+	proj.android/google_play_services/libproject/google-play-services_lib/bin/res/drawable-mdpi/
+	proj.android/google_play_services/libproject/google-play-services_lib/bin/res/drawable-tvdpi/
+	proj.android/google_play_services/libproject/google-play-services_lib/bin/res/drawable-xhdpi/
+	proj.android/google_play_services/libproject/google-play-services_lib/bin/res/drawable-xxhdpi/
+	proj.android/google_play_services/libproject/google-play-services_lib/build.xml
+	proj.android/google_play_services/libproject/google-play-services_lib/gen/R.java.d
+	proj.android/google_play_services/libproject/google-play-services_lib/proguard-project.txt
+
+# backup files
+*.bak
+*.bak[0-9][0-9]
+*.orig
+*.orig[0-9][0-9]
+
+# source packages - anywhere
+*.tar.bz2
+*.tar.gz
+*.tar
+*.tgz
+*.gtgz
+
+
+#other
+local.properties
+Debug.win32/
+Release.win32/
+
+#visual studio
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+# Visual C++ cache files
+ipch/
+*.aps
+*.ncb
+*.opensdf
+*.sdf
+*.cachefile

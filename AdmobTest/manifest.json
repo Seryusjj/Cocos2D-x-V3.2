@@ -1,0 +1,15 @@
+{
+    "name": "com.ubuntu.developer.username.admobtest",
+    "description": "description of AdmobTest",
+    "framework": "ubuntu-sdk-14.04-qml",
+    "architecture": "all",
+    "title": "AdmobTest",
+    "hooks": {
+        "AdmobTest": {
+            "apparmor": "AdmobTest.json",
+            "desktop": "AdmobTest.desktop"
+        }
+    },
+    "version": "0.1",
+    "maintainer": ""
+}

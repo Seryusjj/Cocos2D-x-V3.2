@@ -13,10 +13,10 @@ bool AdmobHelper::isAdShowing = true;
 
 const char* AppActivityClassName = "org/cocos2dx/cpp/AppActivity";
 
-void AdmobHelper::hideAd()
+void AdmobHelper::preloadInterstitialAd()
 {
     cocos2d::JniMethodInfo t;
-    if (cocos2d::JniHelper::getStaticMethodInfo(t, AppActivityClassName, "hideAd", "()V"))
+    if (cocos2d::JniHelper::getStaticMethodInfo(t, AppActivityClassName, "preloadInterstitialAd", "()V"))
     {
 
         t.env->CallStaticVoidMethod(t.classID, t.methodID);
@@ -45,7 +45,7 @@ void AdmobHelper::showAd()
 #else
 
 
-void AdmobHelper::hideAd()
+void AdmobHelper::preloadInterstitialAd()
 {
     //CCLOG("hideAd() called");
     isAdShowing = false;

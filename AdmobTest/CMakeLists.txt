@@ -59,6 +59,8 @@ set(GAME_SRC
   proj.linux/main.cpp
   Classes/AppDelegate.cpp
   Classes/HelloWorldScene.cpp
+  Classes/AdmobHelper.cpp
+
 )
 elseif ( WIN32 )
 set(GAME_SRC

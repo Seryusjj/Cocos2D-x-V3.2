@@ -4,7 +4,7 @@
 class AdmobHelper
 {
 public:
-	static void hideAd();
+    static void preloadInterstitialAd();
 	static void showAd();
 	static bool isAdShowing;
 
