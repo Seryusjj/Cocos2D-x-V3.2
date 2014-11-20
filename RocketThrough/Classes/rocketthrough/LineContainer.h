@@ -20,8 +20,8 @@ class LineContainer : public CCNode {
 public:
 
 	CC_SYNTHESIZE(float, _energy, Energy);
-	CC_SYNTHESIZE(CCPoint, _pivot, Pivot);
-	CC_SYNTHESIZE(CCPoint, _tip, Tip);
+	CC_SYNTHESIZE(Point, _pivot, Pivot);
+	CC_SYNTHESIZE(Point, _tip, Tip);
 	CC_SYNTHESIZE(float, _lineLength, LineLength);
 	CC_SYNTHESIZE(LineType, _lineType, LineType);
 
@@ -38,12 +38,17 @@ private:
 
 	float _lineAngle;
 	float _energyLineX;
-	float _energyHeight;
 	float _energyDecrement;
+	float _energyHeight;
 
 	int _dash;
 	int _dashSpace;
-	CCSize _screenSize;
+	Size _screenSize;
+
+	void drawEnergyBar(const kmMat4 &transform, uint32_t flags);
+	void drawPivotLine(const kmMat4 &transform, uint32_t flags);
+	CustomCommand _customEnergyBar;
+	CustomCommand _customPivotLine;
 
 };
 

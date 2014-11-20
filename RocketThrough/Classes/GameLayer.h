@@ -4,7 +4,8 @@
 
 #include "cocos2d.h"
 #include "SimpleAudioEngine.h"
-
+#include "rocketthrough/Rocket.h"
+#include "rocketthrough/LineContainer.h"
 
 
 USING_NS_CC;
@@ -31,13 +32,12 @@ typedef enum gamestates {
 
 }GameState;
 
-class Rocket;
-class LineContainer;
-class GameSprite;
+
 
 
 class GameLayer : public CCLayer {
 
+private:
 
 	Rocket * _rocket;
 	LineContainer * _lineContainer;
@@ -57,8 +57,8 @@ class GameLayer : public CCLayer {
 	CCParticleSystem * _pickup;
 	CCParticleSystem * _warp;
 
-	CCArray * _planets;
-	CCSize _screenSize;
+	Vector<GameSprite *> _planets;
+	Size _screenSize;
 
 	GameState _state;
 

@@ -3,21 +3,13 @@
 
 
 Rocket::Rocket(void) :
-
 _targetRotation(0),
-
 _dr(0),
-
 _ar(0),
-
 _vr(0),
-
 _rotationSpring(0.2f),
-
 _rotationDamping(0.5f),
-
 _pivot(ccp(-1, -1)),
-
 _rotationOrientation(ROTATE_NONE)
 {
 
@@ -47,7 +39,7 @@ Rocket* Rocket::create() {
 
 	CC_SAFE_DELETE(sprite);
 
-	return NULL;
+	return nullptr;
 }
 
 
@@ -55,7 +47,7 @@ void Rocket::reset() {
 
 
 	_speed = 50;
-	_pivot = ccp(-1, 1);
+	_pivot = Point(-1, 1);
 
 	_rotationOrientation = ROTATE_NONE;
 	this->setRotation(-90);
@@ -63,7 +55,7 @@ void Rocket::reset() {
 	_targetRotation = -90;
 	float angle = CC_DEGREES_TO_RADIANS(this->getRotation());
 
-	_vector = ccp(_speed * cos(angle),
+	_vector = Point(_speed * cos(angle),
 		-_speed * sin(angle));
 
 
@@ -73,7 +65,7 @@ void Rocket::reset() {
 
 void Rocket::update(float dt) {
 
-	CCPoint position = this->getPosition();
+	Point position = this->getPosition();
 	if (_rotationOrientation == ROTATE_NONE) {
 
 		position.x += _vector.x * dt;

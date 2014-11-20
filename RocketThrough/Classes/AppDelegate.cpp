@@ -33,7 +33,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	Size screenSize = glview->getFrameSize();
 	Size designSize = Size(768, 1024);
 
-	glview->setDesignResolutionSize(screenSize.height, screenSize.width, ResolutionPolicy::EXACT_FIT);
+	glview->setDesignResolutionSize(screenSize.width, screenSize.height, ResolutionPolicy::EXACT_FIT);
 
 	float screenRatio = screenSize.height / screenSize.width;
 	std::vector<std::string> resDirOrders;
