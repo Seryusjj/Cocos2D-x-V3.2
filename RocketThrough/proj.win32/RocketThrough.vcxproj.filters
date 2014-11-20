@@ -18,19 +18,19 @@
     <ClCompile Include="main.cpp">
       <Filter>win32</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\AppDelegate.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\GameLayer.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\rocketthrough\GameSprite.cpp">
+    <ClCompile Include="..\Classes\rocketthrough\Rocket.cpp">
       <Filter>Classes\rocketthrough</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\rocketthrough\LineContainer.cpp">
       <Filter>Classes\rocketthrough</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\rocketthrough\Rocket.cpp">
+    <ClCompile Include="..\Classes\AppDelegate.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\rocketthrough\GameSprite.cpp">
       <Filter>Classes\rocketthrough</Filter>
     </ClCompile>
   </ItemGroup>
@@ -38,19 +38,19 @@
     <ClInclude Include="main.h">
       <Filter>win32</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\AppDelegate.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\GameLayer.h">
       <Filter>Classes</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\rocketthrough\GameSprite.h">
+    <ClInclude Include="..\Classes\rocketthrough\Rocket.h">
       <Filter>Classes\rocketthrough</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\rocketthrough\LineContainer.h">
       <Filter>Classes\rocketthrough</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\rocketthrough\Rocket.h">
+    <ClInclude Include="..\Classes\AppDelegate.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\rocketthrough\GameSprite.h">
       <Filter>Classes\rocketthrough</Filter>
     </ClInclude>
   </ItemGroup>

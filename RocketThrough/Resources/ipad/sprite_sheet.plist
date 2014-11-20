@@ -213,18 +213,5 @@
                 <string>{106,85}</string>
             </dict>
         </dict>
-        <key>metadata</key>
-        <dict>
-            <key>format</key>
-            <integer>2</integer>
-            <key>realTextureFileName</key>
-            <string>sprite_sheet.png</string>
-            <key>size</key>
-            <string>{512,1024}</string>
-            <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:60aab990de53a592df73b6a618ef8a90$</string>
-            <key>textureFileName</key>
-            <string>sprite_sheet.png</string>
-        </dict>
     </dict>
 </plist>
