@@ -4,54 +4,33 @@
     <Filter Include="win32">
       <UniqueIdentifier>{84a8ebd7-7cf0-47f6-b75e-d441df67da40}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes">
-      <UniqueIdentifier>{bb6c862e-70e9-49d9-81b7-3829a6f50471}</UniqueIdentifier>
-    </Filter>
     <Filter Include="resource">
       <UniqueIdentifier>{715254bc-d70b-4ec5-bf29-467dd3ace079}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\rocketthrough">
-      <UniqueIdentifier>{355ff762-b8bf-44e7-978d-074be0e2052a}</UniqueIdentifier>
+    <Filter Include="src">
+      <UniqueIdentifier>{bb6c862e-70e9-49d9-81b7-3829a6f50471}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>win32</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\GameLayer.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\rocketthrough\Rocket.cpp">
-      <Filter>Classes\rocketthrough</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\rocketthrough\LineContainer.cpp">
-      <Filter>Classes\rocketthrough</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\AppDelegate.cpp">
-      <Filter>Classes</Filter>
+      <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\rocketthrough\GameSprite.cpp">
-      <Filter>Classes\rocketthrough</Filter>
+    <ClCompile Include="..\Classes\HelloWorldScene.cpp">
+      <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
       <Filter>win32</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\GameLayer.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\rocketthrough\Rocket.h">
-      <Filter>Classes\rocketthrough</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\rocketthrough\LineContainer.h">
-      <Filter>Classes\rocketthrough</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\AppDelegate.h">
-      <Filter>Classes</Filter>
+      <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\rocketthrough\GameSprite.h">
-      <Filter>Classes\rocketthrough</Filter>
+    <ClInclude Include="..\Classes\HelloWorldScene.h">
+      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
