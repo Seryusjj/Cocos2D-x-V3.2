@@ -10,6 +10,9 @@
     <Filter Include="src">
       <UniqueIdentifier>{bb6c862e-70e9-49d9-81b7-3829a6f50471}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\rocketthrough">
+      <UniqueIdentifier>{0487d7cd-42a3-4fcf-8cac-16887ccd1e6b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -18,8 +21,17 @@
     <ClCompile Include="..\Classes\AppDelegate.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\HelloWorldScene.cpp">
+    <ClCompile Include="..\Classes\GameLayer.cpp">
       <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\rocketthrough\GameSprite.cpp">
+      <Filter>src\rocketthrough</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\rocketthrough\LineContainer.cpp">
+      <Filter>src\rocketthrough</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\rocketthrough\Rocket.cpp">
+      <Filter>src\rocketthrough</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -29,8 +41,17 @@
     <ClInclude Include="..\Classes\AppDelegate.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\HelloWorldScene.h">
+    <ClInclude Include="..\Classes\GameLayer.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\rocketthrough\GameSprite.h">
+      <Filter>src\rocketthrough</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\rocketthrough\LineContainer.h">
+      <Filter>src\rocketthrough</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\rocketthrough\Rocket.h">
+      <Filter>src\rocketthrough</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
