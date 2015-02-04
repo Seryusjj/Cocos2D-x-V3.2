@@ -15,20 +15,19 @@ typedef enum lineTypes{
 } LineType;
 
 
-class LineContainer : public CCNode {
+class LineContainer : public Node {
 
 public:
     
     CC_SYNTHESIZE(float, _energy, Energy);
-	CC_SYNTHESIZE(CCPoint, _pivot, Pivot);
-	CC_SYNTHESIZE(CCPoint, _tip, Tip);
+	CC_SYNTHESIZE(Point, _pivot, Pivot);
+	CC_SYNTHESIZE(Point, _tip, Tip);
 	CC_SYNTHESIZE(float, _lineLength, LineLength);
 	CC_SYNTHESIZE(LineType, _lineType, LineType);
 	
     LineContainer();
 	static LineContainer * create();
-    
-   // virtual void draw();
+
     void update (float dt);
     void setEnergyDecrement(float value);
     void reset (void);
@@ -44,6 +43,13 @@ private:
     int _dash;
     int _dashSpace;
 	Size _screenSize;
+
+	void draw(Renderer *renderer, const Mat4& transform, uint32_t flags);
+	void drawEnergyBar(const Mat4 &transform, uint32_t flags);
+	void drawPivotLine(const Mat4 &transform, uint32_t flags);
+	CustomCommand _customEnergyBar;
+	CustomCommand _customPivotLine;
+	
 
 };
 

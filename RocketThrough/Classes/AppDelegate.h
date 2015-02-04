@@ -1,22 +1,20 @@
-//
-//  Rocket_ThroughAppDelegate.h
-//  Rocket Through
-//
-//  Created by Roger Engelbert 
-//  Copyright __MyCompanyName__ 2012. All rights reserved.
-//
+
 
 #ifndef  _APP_DELEGATE_H_
 #define  _APP_DELEGATE_H_
 
 #include "CCApplication.h"
+#include "cocos2d.h"
+#include "GameLayer.h"
+
+USING_NS_CC;
 
 /**
 @brief    The cocos2d Application.
 
 The reason to implement with private inheritance is to hide some interface details of CCDirector.
 */
-class  AppDelegate : private cocos2d::Application
+class  AppDelegate : private Application
 {
 public:
 	AppDelegate();

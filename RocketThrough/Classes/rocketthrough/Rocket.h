@@ -15,14 +15,14 @@ enum {
 class Rocket : public GameSprite {
 
 private:
-	
+
 	float _targetRotation;
 	float _dr;
 	float _ar;
 	float _vr;
 	float _rotationSpring;
 	float _rotationDamping;
-	
+
 public:
 
 	CC_SYNTHESIZE(Point, _vector, Vector);
@@ -30,32 +30,31 @@ public:
 	CC_SYNTHESIZE(float, _speed, Speed);
 	CC_SYNTHESIZE(float, _angularSpeed, AngularSpeed);
 	CC_SYNTHESIZE(int, _rotationOrientation, RotationOrientation);
-	
+
 	Rocket(void);
 	~Rocket(void);
-	
+
 	static Rocket* create();
-	
-	void update (float dt);
-	
-	void reset (void);
-    
-    void select (bool flag);
-    
-    bool collidedWithSides (void);
-    
-    void setTargetRotation (float value) {
-		
-        _targetRotation = value;
-    }
-    
-    void setRotationFromVector () {
-        this->setTargetRotation(CC_RADIANS_TO_DEGREES( atan2(-_vector.y, _vector.x) ) );
-    }
-	
+
+	void update(float dt);
+
+	void reset();
+
+	void select(bool flag);
+
+	bool collidedWithSides();
+
+	void setTargetRotation(float value) {
+
+		_targetRotation = value;
+	}
+
+	void setRotationFromVector() {
+		this->setTargetRotation(CC_RADIANS_TO_DEGREES(atan2(-_vector.y, _vector.x)));
+	}
+
 };
 
 #endif // __ROCKET_H__
 
-		
-	
+

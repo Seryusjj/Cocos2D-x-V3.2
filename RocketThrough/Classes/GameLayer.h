@@ -4,11 +4,14 @@
 
 #include "cocos2d.h"
 #include "SimpleAudioEngine.h"
-
-
+#include "SimpleAudioEngine.h"
+#include "rocketthrough/Rocket.h"
+#include "rocketthrough/LineContainer.h"
 
 USING_NS_CC;
+
 using namespace CocosDenshion;
+
 
 enum {
 	kBackground,
@@ -43,7 +46,7 @@ class GameLayer : public Layer {
 	LineContainer * _lineContainer;
 
 	SpriteBatchNode *_gameBatchNode;
-	LabelBMFont * _scoreDisplay;
+	Label * _scoreDisplay;
 
 	GameSprite * _pauseBtn;
 	Sprite * _intro;
@@ -57,7 +60,7 @@ class GameLayer : public Layer {
 	ParticleSystem * _pickup;
 	ParticleSystem * _warp;
 
-	Vector<Sprite *> _planets;
+	Vector<GameSprite *> _planets;
 	Size _screenSize;
 
 	GameState _state;

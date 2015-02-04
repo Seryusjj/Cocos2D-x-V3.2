@@ -1,10 +1,3 @@
-//
-//  Rocket_ThroughAppDelegate.cpp
-//  Rocket Through
-//
-//  Created by Roger Engelbert
-//  Copyright __MyCompanyName__ 2012. All rights reserved.
-//
 
 /*
  
@@ -15,10 +8,9 @@
 
 #include "AppDelegate.h"
 
-#include "cocos2d.h"
-#include "GameLayer.h"
 
-USING_NS_CC;
+
+
 
 AppDelegate::AppDelegate()
 {
@@ -51,7 +43,7 @@ bool AppDelegate::applicationDidFinishLaunching()
 
 	//modify the display area to test
 	//delete this when finish
-	glview->setFrameSize(600, 800);
+	glview->setFrameSize(768, 1024);
 
 
 	Size screenSize = glview->getFrameSize();
@@ -80,9 +72,9 @@ bool AppDelegate::applicationDidFinishLaunching()
 	director->setContentScaleFactor(screenSize.height / designSize.height);
 	FileUtils::getInstance()->setSearchPaths(resDirOrders);
 
+
 	SimpleAudioEngine::getInstance()->preloadBackgroundMusic(FileUtils::getInstance()->fullPathForFilename("background.mp3").c_str());
 	SimpleAudioEngine::getInstance()->preloadEffect(FileUtils::getInstance()->fullPathForFilename("pickup.wav").c_str());
-	SimpleAudioEngine::getInstance()->preloadEffect(FileUtils::getInstance()->fullPathForFilename("bombRelease.wav").c_str());
 	SimpleAudioEngine::getInstance()->preloadEffect(FileUtils::getInstance()->fullPathForFilename("rocket.wav").c_str());
 	SimpleAudioEngine::getInstance()->preloadEffect(FileUtils::getInstance()->fullPathForFilename("shipBoom.wav").c_str());
 
