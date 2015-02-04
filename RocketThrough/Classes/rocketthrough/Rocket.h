@@ -6,11 +6,11 @@
 
 USING_NS_CC;
 
-enum {
+typedef enum orientation{
 	ROTATE_NONE,
 	ROTATE_CLOCKWISE,
 	ROTATE_COUNTER
-};
+} RotationOrientation;
 
 class Rocket : public GameSprite {
 

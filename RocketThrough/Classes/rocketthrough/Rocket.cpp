@@ -44,6 +44,55 @@ void Rocket::reset() {
 
 
 void Rocket::update(float dt) {
+	Point position = this->getPosition();
+	if (_rotationOrientation == ROTATE_NONE){
+		position.x += _vector.x * dt;
+		position.y += _vector.y * dt;
+	}
+	else
+	{
+		//rotate point arround a pivot by a certain amount
+		Point rotatedPoint = position.rotateByAngle(_pivot, _angularSpeed * dt);
+		position = rotatedPoint;
+		float rotatedAngle;
+		Point clockwise = (position - _pivot).getPerp();
+		if (_rotationOrientation == ROTATE_COUNTER){
+			rotatedAngle = atan2(-1 * clockwise.y, -1 * clockwise.x);
+		}
+		else{
+			rotatedAngle = atan2(clockwise.y, clockwise.x);
+		}
+
+		//update rocket vector
+		_vector.x = _speed * cos(rotatedAngle);
+		_vector.y = _speed*sin(rotatedAngle);
+		this->setRotationFromVector();
+
+
+		if (this->getRotation() > 0){
+			this->setRotation(fmod(this->getRotation(), -360.0f));
+		}
+		else{
+			this->setRotation(fmod(this->getRotation(), 360.0f));
+		}
+		if (_targetRotation > this->getRotation() + 180){
+			_targetRotation -= 360;
+		}
+		if (_targetRotation > this->getRotation() - 180){
+			_targetRotation += 360;
+		}
+
+		_dr = _targetRotation - this->getRotation();
+		_ar = _dr * _rotationSpring;
+		_vr += _ar;
+		_vr *= _rotationDamping;
+		this->setRotation(this->getRotation() + _vr);
+
+	}
+
+
+	this->setPosition(position);
+
 
 
 }
@@ -95,6 +144,7 @@ bool Rocket::collidedWithSides() {
 		this->setRotationFromVector();
 		return true;
 	}
+
 
 	return false;
 }

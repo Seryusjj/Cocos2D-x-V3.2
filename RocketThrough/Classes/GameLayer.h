@@ -34,10 +34,6 @@ typedef enum gamestates {
 
 }GameState;
 
-class Rocket;
-class LineContainer;
-class GameSprite;
-
 
 class GameLayer : public Layer {
 
@@ -48,7 +44,7 @@ class GameLayer : public Layer {
 	SpriteBatchNode *_gameBatchNode;
 	Label * _scoreDisplay;
 
-	GameSprite * _pauseBtn;
+	Sprite * _pauseBtn;
 	Sprite * _intro;
 	Sprite *_gameOver;
 	Sprite *_paused;
@@ -93,10 +89,13 @@ public:
 	virtual bool init();
 
 	// there's no 'id' in cpp, so we recommend to return the class instance pointer
-	static cocos2d::Scene* createScene();
+	static Scene* createScene();
 
+	//main loop
 	void update(float dt);
 
+
+	//touch call back
 	virtual bool onTouchBegan(Touch *touch, Event *unused_event);
 	virtual void onTouchMoved(Touch *touch, Event *unused_event);
 	virtual void onTouchEnded(Touch *touch, Event *unused_event);

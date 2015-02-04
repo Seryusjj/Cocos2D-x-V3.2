@@ -26,7 +26,6 @@ LineContainer::LineContainer() {
 	//auto destination = Point(_energyLineX, _screenSize.height * 0.9f);
 	//drawer->drawLine(origin, destination, Color4F::ORANGE);
 
-
 	auto lineWidth = 8.0 * CC_CONTENT_SCALE_FACTOR();
 	glLineWidth(lineWidth);
 
@@ -70,10 +69,11 @@ void LineContainer::draw(Renderer *renderer, const Mat4& transform, uint32_t fla
 
 	//Create commands
 	_customEnergyBar.func = CC_CALLBACK_0(LineContainer::drawEnergyBar, this, transform, flags);
-	//_customPivotLine.func = CC_CALLBACK_0(LineContainer::drawPivotLine, this, transform, flags);
+	_customPivotLine.func = CC_CALLBACK_0(LineContainer::drawPivotLine, this, transform, flags);
+	
 	//add to renderer
 	renderer->addCommand(&_customEnergyBar);
-	//renderer->addCommand(&_customPivotLine);
+	renderer->addCommand(&_customPivotLine);
 
 }
 
@@ -94,8 +94,6 @@ void LineContainer::drawEnergyBar(const Mat4 &transform, uint32_t flags)
 
 void LineContainer::drawPivotLine(const Mat4 &transform, uint32_t flags)
 {
-
-
 	switch (_lineType) {
 	case LINE_NONE:
 		break;
