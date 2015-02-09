@@ -26,16 +26,17 @@ THE SOFTWARE.
 #define __UILOADINGBAR_H__
 
 #include "ui/UIWidget.h"
+#include "ui/GUIExport.h"
 
 NS_CC_BEGIN
 
 namespace ui {
-
+    class Scale9Sprite;
 /**
 *   @js NA
 *   @lua NA
 */
-class LoadingBar : public Widget
+class CC_GUI_DLL LoadingBar : public Widget
 {
     
     DECLARE_CLASS_GUI_INFO
@@ -65,6 +66,10 @@ public:
      * create a LoadingBar with a texture and a percentage
      **/
     static LoadingBar* create(const std::string& textureName, float percentage = 0);
+    
+    static LoadingBar* create(const std::string& textureName,
+                              TextureResType texType,
+                              float percentage = 0);
     
     /**
      * Changes the progress direction of loadingbar.
@@ -129,7 +134,7 @@ public:
     virtual void ignoreContentAdaptWithSize(bool ignore) override;
     
     //override "getVirtualRendererSize" method of widget.
-    virtual const Size& getVirtualRendererSize() const override;
+    virtual Size getVirtualRendererSize() const override;
     
     //override "getVirtualRenderer" method of widget.
     virtual Node* getVirtualRenderer() override;
@@ -143,6 +148,7 @@ protected:
     virtual void onSizeChanged() override;
    
     void setScale9Scale();
+    void updateProgressBar();
     void barRendererScaleChangedWithSize();
     
     virtual void adaptRenderers() override;
@@ -153,7 +159,7 @@ protected:
     Direction _direction;
     float _percent;
     float _totalLength;
-    Node* _barRenderer;
+    Scale9Sprite* _barRenderer;
     TextureResType _renderBarTexType;
     Size _barRendererTextureSize;
     bool _scale9Enabled;

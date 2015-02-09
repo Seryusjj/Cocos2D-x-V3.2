@@ -31,14 +31,13 @@
 #include "base/CCRef.h"
 #include "math/CCGeometry.h"
 
+struct cpShape;
+
 NS_CC_BEGIN
 
-class PhysicsShapeInfo;
 class PhysicsBody;
-class PhysicsBodyInfo;
 
-
-typedef struct PhysicsMaterial
+typedef struct CC_DLL PhysicsMaterial
 {
     float density;          ///< The density of the object.
     float restitution;      ///< The bounciness of the physics body.
@@ -57,12 +56,12 @@ typedef struct PhysicsMaterial
     {}
 }PhysicsMaterial;
 
-const PhysicsMaterial PHYSICSSHAPE_MATERIAL_DEFAULT(0.0f, 0.5f, 0.5f);
+const PhysicsMaterial PHYSICSSHAPE_MATERIAL_DEFAULT;
 
 /**
  * @brief A shape for body. You do not create PhysicsWorld objects directly, instead, you can view PhysicsBody to see how to create it.
  */
-class PhysicsShape : public Ref
+class CC_DLL PhysicsShape : public Ref
 {
 public:
     enum class Type
@@ -140,27 +139,23 @@ public:
     inline void setCollisionBitmask(int bitmask) { _collisionBitmask = bitmask; }
     inline int getCollisionBitmask() const { return _collisionBitmask; }
     
+    /**
+     * set the group of body
+     * Collision groups let you specify an integral group index. You can have all fixtures with the same group index always collide (positive index) or never collide (negative index)
+     * it have high priority than bit masks
+     */
     void setGroup(int group);
     inline int getGroup() { return _group; }
     
 protected:
-    bool init(Type type);
-    
-    /**
-     * @brief PhysicsShape is PhysicsBody's friend class, but all the subclasses isn't. so this method is use for subclasses to catch the bodyInfo from PhysicsBody.
-     */
-    PhysicsBodyInfo* bodyInfo() const;
-    
     void setBody(PhysicsBody* body);
     
     /** calculate the area of this shape */
     virtual float calculateArea() { return 0.0f; }
     
-    virtual void setScale(float scale);
     virtual void setScale(float scaleX, float scaleY);
-    virtual void setScaleX(float scaleX);
-    virtual void setScaleY(float scaleY);
-    virtual void update(float delta);
+    virtual void updateScale();
+    void addShape(cpShape* shape);
     
 protected:
     PhysicsShape();
@@ -168,7 +163,8 @@ protected:
     
 protected:
     PhysicsBody* _body;
-    PhysicsShapeInfo* _info;
+    std::vector<cpShape*> _cpShapes;
+
     Type _type;
     float _area;
     float _mass;
@@ -177,7 +173,6 @@ protected:
     float _scaleY;
     float _newScaleX;
     float _newScaleY;
-    bool _dirty;
     PhysicsMaterial _material;
     int _tag;
     int    _categoryBitmask;
@@ -192,7 +187,7 @@ protected:
 };
 
 /** A circle shape */
-class PhysicsShapeCircle : public PhysicsShape
+class CC_DLL PhysicsShapeCircle : public PhysicsShape
 {
 public:
     static PhysicsShapeCircle* create(float radius, const PhysicsMaterial& material = PHYSICSSHAPE_MATERIAL_DEFAULT, const Vec2& offset = Vec2(0, 0));
@@ -207,11 +202,7 @@ public:
 protected:
     bool init(float radius, const PhysicsMaterial& material = PHYSICSSHAPE_MATERIAL_DEFAULT, const Vec2& offset = Vec2::ZERO);
     virtual float calculateArea() override;
-    virtual void setScale(float scale) override;
-    virtual void setScale(float scaleX, float scaleY) override;
-    virtual void setScaleX(float scale) override;
-    virtual void setScaleY(float scale) override;
-    virtual void update(float delta) override;
+    virtual void updateScale() override;
     
 protected:
     PhysicsShapeCircle();
@@ -219,7 +210,7 @@ protected:
 };
 
 /** A polygon shape */
-class PhysicsShapePolygon : public PhysicsShape
+class CC_DLL PhysicsShapePolygon : public PhysicsShape
 {
 public:
     static PhysicsShapePolygon* create(const Vec2* points, int count, const PhysicsMaterial& material = PHYSICSSHAPE_MATERIAL_DEFAULT, const Vec2& offset = Vec2::ZERO);
@@ -235,7 +226,7 @@ public:
 protected:
     bool init(const Vec2* points, int count, const PhysicsMaterial& material = PHYSICSSHAPE_MATERIAL_DEFAULT, const Vec2& offset = Vec2::ZERO);
     float calculateArea() override;
-    virtual void update(float delta) override;
+    virtual void updateScale() override;
     
 protected:
     PhysicsShapePolygon();
@@ -243,7 +234,7 @@ protected:
 };
 
 /** A box shape */
-class PhysicsShapeBox : public PhysicsShapePolygon
+class CC_DLL PhysicsShapeBox : public PhysicsShapePolygon
 {
 public:
     static PhysicsShapeBox* create(const Size& size, const PhysicsMaterial& material = PHYSICSSHAPE_MATERIAL_DEFAULT, const Vec2& offset = Vec2::ZERO);
@@ -260,7 +251,7 @@ protected:
 };
 
 /** A segment shape */
-class PhysicsShapeEdgeSegment : public PhysicsShape
+class CC_DLL PhysicsShapeEdgeSegment : public PhysicsShape
 {
 public:
     static PhysicsShapeEdgeSegment* create(const Vec2& a, const Vec2& b, const PhysicsMaterial& material = PHYSICSSHAPE_MATERIAL_DEFAULT, float border = 1);
@@ -271,7 +262,7 @@ public:
     
 protected:
     bool init(const Vec2& a, const Vec2& b, const PhysicsMaterial& material = PHYSICSSHAPE_MATERIAL_DEFAULT, float border = 1);
-    virtual void update(float delta) override;
+    virtual void updateScale() override;
     
 protected:
     PhysicsShapeEdgeSegment();
@@ -281,7 +272,7 @@ protected:
 };
 
 /** An edge polygon shape */
-class PhysicsShapeEdgePolygon : public PhysicsShape
+class CC_DLL PhysicsShapeEdgePolygon : public PhysicsShape
 {
 public:
     static PhysicsShapeEdgePolygon* create(const Vec2* points, int count, const PhysicsMaterial& material = PHYSICSSHAPE_MATERIAL_DEFAULT, float border = 1);
@@ -291,7 +282,7 @@ public:
     
 protected:
     bool init(const Vec2* points, int count, const PhysicsMaterial& material = PHYSICSSHAPE_MATERIAL_DEFAULT, float border = 1);
-    virtual void update(float delta) override;
+    virtual void updateScale() override;
     
 protected:
     PhysicsShapeEdgePolygon();
@@ -301,7 +292,7 @@ protected:
 };
 
 /** An edge box shape */
-class PhysicsShapeEdgeBox : public PhysicsShapeEdgePolygon
+class CC_DLL PhysicsShapeEdgeBox : public PhysicsShapeEdgePolygon
 {
 public:
     static PhysicsShapeEdgeBox* create(const Size& size, const PhysicsMaterial& material = PHYSICSSHAPE_MATERIAL_DEFAULT, float border = 0, const Vec2& offset = Vec2::ZERO);
@@ -318,7 +309,7 @@ protected:
 };
 
 /** a chain shape */
-class PhysicsShapeEdgeChain : public PhysicsShape
+class CC_DLL PhysicsShapeEdgeChain : public PhysicsShape
 {
 public:
     static PhysicsShapeEdgeChain* create(const Vec2* points, int count, const PhysicsMaterial& material = PHYSICSSHAPE_MATERIAL_DEFAULT, float border = 1);
@@ -328,7 +319,7 @@ public:
     
 protected:
     bool init(const Vec2* points, int count, const PhysicsMaterial& material = PHYSICSSHAPE_MATERIAL_DEFAULT, float border = 1);
-    virtual void update(float delta) override;
+    virtual void updateScale() override;
     
 protected:
     PhysicsShapeEdgeChain();

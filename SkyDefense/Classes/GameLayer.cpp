@@ -375,9 +375,10 @@ void GameLayer::stopGame() {
 void GameLayer::createGameScreen() {
 	//SCENE
 	//add bg
-	Sprite * bg = Sprite::create(FileNameOrganicer::getInstance()->backgroundTexure);
-	bg->setPosition(Point(screenSize.width * 0.5f, screenSize.height * 0.5f));
-	this->addChild(bg);
+	Sprite * bgSprite = Sprite::create(FileNameOrganicer::getInstance()->backgroundTexure);
+
+	bgSprite->setPosition(Point(screenSize.width * 0.5f, screenSize.height * 0.5f));
+	this->addChild(bgSprite);
 
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile(FileNameOrganicer::getInstance()->spriteSheetPlist);
 	gameBatchNode = SpriteBatchNode::create(FileNameOrganicer::getInstance()->spriteSheetPng);

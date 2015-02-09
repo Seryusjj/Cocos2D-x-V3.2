@@ -27,6 +27,7 @@ THE SOFTWARE.
 #define __UILISTVIEW_H__
 
 #include "ui/UIScrollView.h"
+#include "ui/GUIExport.h"
 
 NS_CC_BEGIN
 
@@ -41,7 +42,7 @@ typedef enum
 typedef void (Ref::*SEL_ListViewEvent)(Ref*,ListViewEventType);
 #define listvieweventselector(_SELECTOR) (SEL_ListViewEvent)(&_SELECTOR)
 
-class ListView : public ScrollView
+class CC_GUI_DLL ListView : public ScrollView
 {
  
     DECLARE_CLASS_GUI_INFO
@@ -161,6 +162,8 @@ public:
     
     float getItemsMargin()const;
     
+    virtual void forceDoLayout()override;
+
     virtual void doLayout() override;
     
     virtual void addChild(Node* child)override;
@@ -198,6 +201,9 @@ protected:
     
     void updateInnerContainerSize();
     void remedyLayoutParameter(Widget* item);
+    void remedyVerticalLayoutParameter(LinearLayoutParameter* layoutParameter, ssize_t itemIndex);
+    void remedyHorizontalLayoutParameter(LinearLayoutParameter* layoutParameter,ssize_t itemIndex);
+    
     virtual void onSizeChanged() override;
     virtual Widget* createCloneInstance() override;
     virtual void copySpecialProperties(Widget* model) override;

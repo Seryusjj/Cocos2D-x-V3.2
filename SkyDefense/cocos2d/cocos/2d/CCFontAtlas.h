@@ -25,11 +25,12 @@
 #ifndef _CCFontAtlas_h_
 #define _CCFontAtlas_h_
 
-#include "base/CCPlatformMacros.h"
-#include "base/CCRef.h"
-#include "CCStdC.h"
 #include <string>
 #include <unordered_map>
+
+#include "platform/CCPlatformMacros.h"
+#include "base/CCRef.h"
+#include "platform/CCStdC.h" // ssize_t on windows
 
 NS_CC_BEGIN
 
@@ -60,7 +61,8 @@ class CC_DLL FontAtlas : public Ref
 public:
     static const int CacheTextureWidth;
     static const int CacheTextureHeight;
-    static const char* EVENT_PURGE_TEXTURES;
+    static const char* CMD_PURGE_FONTATLAS;
+    static const char* CMD_RESET_FONTATLAS;
     /**
      * @js ctor
      */
@@ -106,8 +108,7 @@ public:
      */
      void setAliasTexParameters();
 
-private:
-
+protected:
     void relaseTextures();
     std::unordered_map<ssize_t, Texture2D*> _atlasTextures;
     std::unordered_map<unsigned short, FontLetterDefinition> _fontLetterDefinitions;
@@ -121,12 +122,10 @@ private:
     float _currentPageOrigX;
     float _currentPageOrigY;
     float _letterPadding;
-    bool  _makeDistanceMap;
 
     int _fontAscender;
     EventListenerCustom* _rendererRecreatedListener;
     bool _antialiasEnabled;
-    bool _rendererRecreate;
 };
 
 

@@ -1,9 +1,10 @@
 #ifndef __GAME_LAYER_H__
 #define __GAME_LAYER_H__
 
-#include<iostream>
+#include <iostream>
 #include "cocos2d.h"
 #include "FileNameOrganicer.h"
+#include "SimpleAudioEngine.h"
 
 USING_NS_CC;
 using namespace CocosDenshion;
