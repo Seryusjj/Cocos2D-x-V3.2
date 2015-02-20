@@ -29,7 +29,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
         director->setOpenGLView(glview);
     }
 
-	glview->setFrameSize(320, 480);
+	glview->setFrameSize(320,480);
 	Size screenSize = glview->getFrameSize();
 	//designed for the regular iphone
 	Size designSize = Size(320, 480);
@@ -53,10 +53,10 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
 
 
-	SimpleAudioEngine::sharedEngine()->preloadEffect(FileUtils::getInstance()->fullPathForFilename("ball.wav").c_str());
-	SimpleAudioEngine::sharedEngine()->preloadEffect(FileUtils::getInstance()->fullPathForFilename("drop.wav").c_str());
-	SimpleAudioEngine::sharedEngine()->preloadEffect(FileUtils::getInstance()->fullPathForFilename("hit.wav").c_str());
-	SimpleAudioEngine::sharedEngine()->preloadEffect(FileUtils::getInstance()->fullPathForFilename("whitedrop.wav").c_str());
+	SimpleAudioEngine::getInstance()->preloadEffect(FileUtils::getInstance()->fullPathForFilename("ball.wav").c_str());
+	SimpleAudioEngine::getInstance()->preloadEffect(FileUtils::getInstance()->fullPathForFilename("drop.wav").c_str());
+	SimpleAudioEngine::getInstance()->preloadEffect(FileUtils::getInstance()->fullPathForFilename("hit.wav").c_str());
+	SimpleAudioEngine::getInstance()->preloadEffect(FileUtils::getInstance()->fullPathForFilename("whitedrop.wav").c_str());
 
     // turn on display FPS
     //director->setDisplayStats(true);

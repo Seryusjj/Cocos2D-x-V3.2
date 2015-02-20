@@ -1,12 +1,15 @@
 #ifndef __MiniPool__b2Sprite__
 #define __MiniPool__b2Sprite__
 
-#include "Box2D/Box2D.h"
+
+
 #include "cocos2d.h"
-#include "GameLayer.h"
+#include "Box2D/Box2D.h"
+
 
 USING_NS_CC;
 
+class GameLayer;
 
 enum {
 	kSpritePlayer,
@@ -14,7 +17,6 @@ enum {
 	kSpriteCue,
 	kSpritePocket
 };
-
 
 
 class B2Sprite : public Sprite

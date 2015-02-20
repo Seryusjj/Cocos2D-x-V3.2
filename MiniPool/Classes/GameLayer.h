@@ -2,16 +2,18 @@
 #define __HELLOWORLD_SCENE_H__
 
 #include "cocos2d.h"
-#include "SimpleAudioEngine.h"
 #include "Box2D/Box2D.h"
 #include "CollisionListener.h"
 #include "GLES-Render.h"
 #include "LineContainer.h"
+#include "B2Sprite.h"
 #include "Ball.h"
 #include "Cue.h"
 
 
 #define PTM_RATIO 32
+#define SHOT_POWER 6.0
+#define BALL_RADIUS 8.0
 
 USING_NS_CC;
 
@@ -31,13 +33,14 @@ enum {
 class GameLayer : public Layer
 {
 private:
+	CustomCommand _customCommand;
 	GLESDebugDraw * _debugDraw;
 	CollisionListener * _collisionListener;
 
 	Touch * _touch;
 	Vector<Sprite*> _balls;
 	Vector<Sprite*> _pockets;
-	SpriteBatchNode * _gameBatchNode;
+	SpriteBatchNode* _gameBatchNode;
 	Sprite * _intro;
 	Sprite * _gameOver;
 	Label * _timer;
@@ -74,6 +77,7 @@ public:
 	virtual bool init();
 
 	virtual void draw(Renderer *renderer, const Mat4 &transform, uint32_t flags);
+	void onDraw(const Mat4 &transform);
 
 	//touch call back
 	virtual bool onTouchBegan(Touch *touch, Event *unused_event);
