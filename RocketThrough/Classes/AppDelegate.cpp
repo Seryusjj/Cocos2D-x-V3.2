@@ -43,13 +43,16 @@ bool AppDelegate::applicationDidFinishLaunching()
 
 	//modify the display area to test
 	//delete this when finish
-	glview->setFrameSize(768, 1024);
+	// 480 x 854
+	glview->setFrameSize(480, 854);//sony xeria u
+	//glview->setFrameSize(320,480 );//iphone
+	//glview->setFrameSize(768, 1024);//desing res
 
 
 	Size screenSize = glview->getFrameSize();
 	Size designSize = Size(768, 1024);
 
-	glview->setDesignResolutionSize(screenSize.width, screenSize.height, ResolutionPolicy::EXACT_FIT);
+	glview->setDesignResolutionSize(designSize.width, designSize.height, ResolutionPolicy::EXACT_FIT);
 
 	float screenRatio = screenSize.height / screenSize.width;
 	
@@ -69,7 +72,8 @@ bool AppDelegate::applicationDidFinishLaunching()
 		resDirOrders.push_back("iphone");
 	}
 
-	director->setContentScaleFactor(screenSize.height / designSize.height);
+
+	director->setContentScaleFactor(screenSize.height / designSize.height );
 	FileUtils::getInstance()->setSearchPaths(resDirOrders);
 
 
